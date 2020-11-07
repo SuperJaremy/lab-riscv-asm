@@ -10,7 +10,7 @@ matrix:
 .word 4,4,4,4,4,4
 .word 5,5,5,5,5,5
 number:
-.word -3
+.word 4
 result:
 .word 0
 
@@ -41,7 +41,10 @@ li t3,0
 loop:
 lw t6,0(a4)
 addi a4,a4,4
-bge t6,t5,test
+ble t6,t5,cnt
+lw t0, 0(a5)
+addi t0, t0, 1
+sw t0, 0(a5)
 
 cnt:
 addi t3,t3,1
@@ -49,10 +52,3 @@ blt t3, t1, loop
 addi t4, t4, 1
 blt t4, t2, init
 ret
-
-test:
-beq t6, t5, cnt
-lw t0, 0(a5)
-addi t0, t0, 1
-sw t0, 0(a5)
-j cnt
